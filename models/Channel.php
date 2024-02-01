@@ -21,7 +21,7 @@ class Channel
         $this->id = $id;
     }
 
-    public function getName(): ?int
+    public function getName(): string
     {
         return $this->name;
     }
@@ -34,7 +34,7 @@ class Channel
     {
         return $this->category;
     }
-    public function setCategory(string $category): void
+    public function setCategory(Category $category): void
     {
         $this->category = $category;
     }
