@@ -19,7 +19,7 @@ class Category
         $this->id = $id;
     }
 
-    public function getName(): ?int
+    public function getName(): string
     {
         return $this->name;
     }
