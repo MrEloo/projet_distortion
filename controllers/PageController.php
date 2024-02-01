@@ -17,4 +17,10 @@ class PageController
         $route = 'home';
         require 'templates/layout.phtml';
     }
+     public function about(): void
+     
+    {
+        $route = 'about';
+        require 'templates/layout.phtml';
+    }
 }
