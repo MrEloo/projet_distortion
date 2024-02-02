@@ -99,7 +99,7 @@ class PostManager extends AbstractManager
 
     public function update(Post $post): void
     {
-        $query = $this->prepare('UPDATE posts 
+        $query = $this->db->prepare('UPDATE posts 
         SET 
             content = COALESCE(:content, content),
             created_at = COALESCE(:created_at, created_at)

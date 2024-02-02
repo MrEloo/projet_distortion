@@ -64,10 +64,6 @@ class ChannelsManager extends AbstractManager
     public function deleteChannel($id): void
     {
 
-        $newCategoryManager = new CategoryManager();
-
-
-
         $deleteQuery = $this->db->prepare('DELETE FROM posts WHERE id_salon = :id_salon');
         $parametersDeletePosts = [
             'id_salon' => $id,

@@ -65,7 +65,7 @@ $instanceChannelController = new ChannelController();
 $channelsToDisplay = $instanceChannelController->showChannels();
 foreach ($channelsToDisplay as $channel) {
 ?>
-    <a href="index.php?route=delete-channel&channel-id=2">DELETE Channel</a>
+    <a href="index.php?route=delete-channel&channel-id=3">DELETE Channel</a>
     <a href="index.php?route=delete-category&category-id=2">DELETE category</a>
     <p><?= $channel->getName() ?> in <?= $channel->getCategory()->getName() ?></p>
     </br>
