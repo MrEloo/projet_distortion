@@ -3,18 +3,16 @@
 class Category
 {
     private ?int $id = null;
-    private string $name;
 
-    public function __construct(string $name)
+    public function __construct(private string $name)
     {
-        $this->name = $name;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
-    public function setId(?int $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
