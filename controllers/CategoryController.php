@@ -12,15 +12,15 @@ class CategoryController
         if (isset($_POST['name'])) {
             $newCategory = new Category($_POST['name']);
             if ($instanceCategoryManager->findName($newCategory)) {
-
-                header("Location: index.php?errorCategory=already-exist");
+                
+                header("Location: ../index.php?errorCategory=already-exist");
             } else {
                 $instanceCategoryManager->createCategory($newCategory);
-                header("Location: index.php");
+                header("Location: ../index.php");
             }
         }
-
-        /*   if (isset($_POST['name'])) 
+        
+     /*   if (isset($_POST['name'])) 
         {
             $name = $_POST['name'];
             
@@ -30,25 +30,32 @@ class CategoryController
             if ($cat1)
             {  
                 header("Location: index.php");
-                exit();
             }
-        }
-        else 
-        {
-            $name = $_POST['name'];
-            $cat = new Category($name);
-            
-            $cm->create($cat);
-        }
+        }   
     }
     
-   */
-    }
-
-    public function deleteCategory(): void
+/* test */
+    
+    public function displayAllCategories(): void
     {
-        $instanceChannelManager = new CategoryManager();
-        $instanceChannelManager->delete($_GET['channel-id']);
-        header('Location: index.php');
+        $instanceCategoryManager = new CategoryManager();
+        $categoriesToDisplay = $instanceCategoryManager->findAll();
+        require "templates/layout.phtml";
+    }    
+    
+    public function ChannelsbyCategories(): void
+    {
+        $instanceCategoryManager = new CategoryManager();
+        $categoriesToSort = $this->displayAllCategories(); 
+        foreach ($categoriesToSort as $category) {
+            $category->getName();
+        }
+    }    
+    
+    public function ChannelsFromCategory(): void
+    {
+    $AllChannelsFromCategory = $instanceCategoryManager -> getAllChannelsFromCategory($category->getId());
     }
+    
+    
 }

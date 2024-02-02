@@ -1,9 +1,33 @@
 <?php
-$instanceCategoryManager = new CategoryManager();
-$categoriesToDisplay = $instanceCategoryManager->findAll();
+
+foreach ($categoriesToDisplay as $category) {
 ?>
+    <h3><?= $category->getName() ?></h3>
+    <ul>
+        <?php
+
+        $AllChannelsFromCategory = $instanceCategoryManager->getAllChannelsFromCategory($category->getId());
+
+        if (isset($AllChannelsFromCategory)) {
+
+            foreach ($AllChannelsFromCategory as $channel) {; ?>
+
+                <li>
+                    <?= $channel->getName() ?>
+                    <a href='index.php?id_channel=<?= $channel->getId() ?>'>Lire</a>
+                </li>
+
+        <?php }
+        }; ?>
+
+    </ul>
+    </br>
+<?php
+}
+?>
+
 <div class="container mt-5">
-    <form method="POST" action="logic/createCategory.php">
+    <form method="POST" action="index.php?route=create-category">
         <div class="form-group">
             <label for="name">Nom de la catégorie :</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom de la catégorie">
@@ -64,12 +88,12 @@ foreach ($postToDisplay as $post) {
 }
 ?>
 <div class="container mt-5">
-    <h2>Formulaire de Post</h2>
-    <form>
+    <form method="POST" action="index.php?route=create-post">
         <div class="form-group">
-            <label for="postContent">Contenu du Post</label>
-            <textarea class="form-control" id="postContent" rows="5" placeholder="Entrez votre message ici" required></textarea>
+            <input type="hidden" name="id_channel" value="6" />
+            <label for="content">Commentaire :</label>
+            <textarea class="form-control" id="content" name="content" rows="4" placeholder="Saisissez votre commentaire ici"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Publier</button>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
 </div>
