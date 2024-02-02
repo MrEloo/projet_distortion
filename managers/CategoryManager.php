@@ -17,9 +17,9 @@ class CategoryManager extends AbstractManager
         $categories_array = [];
         
         foreach($categories as $category) {
-            $category1 = new Category($category["name"]);
-            $category1->setId($category["id"]);
-            $categories_array[]=$category1;
+            $newCategory = new Category($category["name"]);
+            $newCategory->setId($category["id"]);
+            $categories_array[]=$newCategory;
         }
         
         return $categories_array;
@@ -36,36 +36,36 @@ class CategoryManager extends AbstractManager
         $category = $query->fetch(PDO::FETCH_ASSOC);
         
       
-        if ($category) {
-            $category1 = new Category($category["name"]);
-            $category1->setId($category["id"]);
+        if (isset($category)) {
+            $newCategory = new Category($category["name"]);
+            $newCategory->setId($category["id"]);
             
-            return $category1;
+            return $newCategory;
         }
         return null;
     }
     
-    public function findName (Category $name) : ?Category
+    public function findName (Category $category) : ?Category
     {
         $query = $this->db->prepare('SELECT * FROM categories WHERE name = :name');
         $parameters = [
-            'name' => $name->getName()
+            'name' => $category->getName()
         ];
         $query->execute($parameters);
-        $category = $query->fetch(PDO::FETCH_ASSOC);
+        $categorySearch = $query->fetch(PDO::FETCH_ASSOC);
         
       
-        if ($category) {
-            $cat1 = new Category($category["name"]);
-            $cat1->setId($category["id"]);
+        if (isset($categorySearch)) {
+            $newCategory = new Category($categorySearch["name"]);
+            $newCategory->setId($categorySearch["id"]);
             
-            return $cat1;
+            return $newCategory;
         }
         return null;
     }
     
     
-    public function create (Category $category) : void
+    public function createCategory (Category $category) : void
     {
         $query = $this->db->prepare('INSERT INTO categories (name) VALUES (:name)');
         $parameters = [

@@ -24,32 +24,33 @@ class PostManager extends AbstractManager {
         $postsArray = [];
         
         foreach ($posts as $post) {
+            $newCategory = new Category($post['category_name']);
             $newPost = new Post($post['content']);
-            $newPost->setId_channel($post['id_salon']);
-            $newPost->setId_category($post['category_id']);
-            $newPost->setChannel_name($post['channel_name']);
-            $newPost->setCategory($post['category_name']);
+            $newCategory->setId($post['category_id']); 
             $newPost->setId($post["id"]);
+            $newChannel = new Channel($newCategory, $post['channel_name']);
+            $newChannel->setId($post['id_salon']);
+            $newPost->setChannel($newChannel);
             $postsArray[] = $newPost;
         }
         
         return $postsArray;
     }
-
-    
-    public function findSpecifik() : array {
-        $query = $this->db->prepare('SELECT *
-        FROM posts');
-        $query->execute();
-        $posts = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $posts;
-    }
     
     public function findOne(int $id): ?Post {
-        $query = $this->db->prepare('SELECT posts.*, channels.id AS channel_id, categories.id AS category_id, categories.name AS category_name, channels.name AS channel_name
-        FROM posts
-        JOIN channels ON posts.id_salon = channels.id_cat
-        JOIN categories ON channels.id_cat = categories.id
+        $query = $this->db->prepare('
+        SELECT 
+            posts.*, 
+            channels.id AS channel_id, 
+            categories.id AS category_id, 
+            categories.name AS category_name, 
+            channels.name AS channel_name
+        FROM 
+            posts
+        JOIN 
+            channels ON posts.id_salon = channels.id
+        JOIN 
+            categories ON channels.id_cat = categories.id
         WHERE posts.id = :id');
     
         $parameters = [
@@ -59,8 +60,15 @@ class PostManager extends AbstractManager {
     
         $post = $query->fetch(PDO::FETCH_ASSOC);
     
-        if ($post) {
-            return $post;
+        if (isset($post)) {
+            $newCategory = new Category($post['category_name']);
+            $newPost = new Post($post['content']);
+            $newCategory->setId($post['category_id']); 
+            $newPost->setId($post["id"]);
+            $newChannel = new Channel($newCategory, $post['channel_name']);
+            $newChannel->setId($post['id_salon']);
+            $newPost->setChannel($newChannel);
+            return $newPost;
         } else {
             return null;
         }
@@ -69,18 +77,20 @@ class PostManager extends AbstractManager {
 
     
     
-    public function create(Post $post) : void {
+    public function createPost(Post $post) : void {
           $query = $this->db->prepare('INSERT INTO posts (content, id_salon, created_at) 
                     VALUES (:content, :id_salon, :created_at)');
         $parameters = [
             "content" => $post->getContent(),
-            "id_salon" => $post->getIdSalon(),
-            "created_at" => $post->getCreated_at()
+            "id_salon" => $post->getChannelId(),
+            "created_at" => $post->getCreatedAt()
             ];
             $query->execute($parameters);
             $lastPostId = $this->db->lastInsertId();
             $post->setId($lastPostId);
     }
+    
+    
     
     public function update(Post $post) : void {
         $query = $this->prepare('UPDATE posts 

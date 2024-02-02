@@ -11,6 +11,9 @@ class Router
         } else if (isset($get["route"]) && $get['route'] === "home") {
             $instancePageController = new PageController();
             $instancePageController->home();
+        } else if (isset($get["route"]) && $get['route'] === "create-category") {
+            $instancePageController = new CategoryController();
+            $instancePageController->createCategory();
         } else if (!isset($get["route"])) {
             $instancePageController = new PageController();
             $instancePageController->home();

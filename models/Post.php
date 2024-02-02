@@ -4,6 +4,7 @@ class Post {
     private int $id;
     private Channel $channel;
     private Category $category;
+    private int $id_channel;
     
     public function __construct(private string $content) {
         $this->created_at = (new DateTime())->format('Y-m-d H:i:s');
@@ -46,5 +47,11 @@ class Post {
     
     public function getCategory() : Category {
         return $this->category; 
+    }
+    public function setChannelId(int $id_channel) : void {
+        $this->id_channel = $id_channel;
+    }
+    public function getChannelId() : int {
+        return $this->id_channel;
     }
 }
