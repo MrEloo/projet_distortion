@@ -25,26 +25,27 @@ class ChannelsManager extends AbstractManager
         }
         return $channels;
     }
-    
-    public function getChannelWithIdCategory(string $channelName, int $id_category) : ?Channel {
+
+    public function getChannelWithIdCategory(string $channelName, int $id_category): ?Channel
+    {
         $query = $this->db->prepare('SELECT * FROM channels WHERE name = :name AND id_cat = :id_cat');
         $parameters = [
             'name' => $channelName,
-            'id_cat' =>$id_category
+            'id_cat' => $id_category
         ];
         $query->execute($parameters);
-        
+
         $channelSearch = $query->fetch(PDO::FETCH_ASSOC);
-        
+
         if ($channelSearch) {
             $instanceCategoryManager = new CategoryManager;
             $category = $instanceCategoryManager->findOne($channelSearch["id_cat"]);
             if (isset($category)) {
-            $newChannel = new Channel($category, $channelSearch["name"]);
-            $newChannel->setId($channelSearch["id"]);
-     
-            return $newChannel;
-            }   
+                $newChannel = new Channel($category, $channelSearch["name"]);
+                $newChannel->setId($channelSearch["id"]);
+
+                return $newChannel;
+            }
         }
         return null;
     }

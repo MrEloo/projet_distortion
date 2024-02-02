@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 <?php 
 
 foreach ($categoriesToDisplay as $category) {
+=======
+<?php
+$instanceCategoryManager = new CategoryManager();
+$categoriesToDisplay = $instanceCategoryManager->findAll();
+>>>>>>> 0895c564370fe7ba4f0f73bedf225ecbd4b98c03
 ?>
   <h3><?= $category->getName() ?></h3>
     <ul>
@@ -39,7 +45,7 @@ foreach ($categoriesToDisplay as $category) {
     <form method="POST" action="index.php?route=create-channel">
         <div class="form-group">
             <label for="name">Nom du channel :</label>
-            <input type="hidden" name="id_category" value="5"/>
+            <input type="hidden" name="id_category" value="5" />
             <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du channel">
         </div>
         <button type="submit" class="btn btn-primary">Soumettre</button>
@@ -51,28 +57,29 @@ $postToDisplay = $instancePostManager->findAll();
 $instanceChannelController = new ChannelController();
 $channelsToDisplay = $instanceChannelController->showChannels();
 foreach ($channelsToDisplay as $channel) {
-  ?>
-  <p><?= $channel->getName() ?> in <?= $channel->getCategory()->getName() ?></p>
-  </br>
-  <?php
+?>
+    <p><?= $channel->getName() ?> in <?= $channel->getCategory()->getName() ?></p>
+    </br>
+<?php
 }
 
 foreach ($postToDisplay as $post) {
 ?>
     <div class="card mb-3">
-      <div class="card-header">
-        <strong>Channel:</strong> <?php echo $post->getChannel()->getName(); ?>
-        <br>
-        <strong>Category:</strong> <?php echo $post->getChannel()->getCategory()->getName(); ?>
-      </div>
-      <div class="card-body">
-        <p class="card-text"><?php echo $post->getContent(); ?></p>
-      </div>
+        <div class="card-header">
+            <strong>Channel:</strong> <?php echo $post->getChannel()->getName(); ?>
+            <br>
+            <strong>Category:</strong> <?php echo $post->getChannel()->getCategory()->getName(); ?>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><?php echo $post->getContent(); ?></p>
+        </div>
     </div>
 <?php
 }
 ?>
 <div class="container mt-5">
+<<<<<<< HEAD
   <form method="POST" action="index.php?route=create-post">
     <div class="form-group">
       <input type="hidden" name="id_channel" value="6"/>
@@ -81,4 +88,14 @@ foreach ($postToDisplay as $post) {
     </div>
     <button type="submit" class="btn btn-primary">Envoyer</button>
   </form>
+=======
+    <h2>Formulaire de Post</h2>
+    <form>
+        <div class="form-group">
+            <label for="postContent">Contenu du Post</label>
+            <textarea class="form-control" id="postContent" rows="5" placeholder="Entrez votre message ici" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Publier</button>
+    </form>
+>>>>>>> 0895c564370fe7ba4f0f73bedf225ecbd4b98c03
 </div>

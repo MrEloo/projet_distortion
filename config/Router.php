@@ -4,7 +4,8 @@
 class Router
 {
 
-   public function handleRequest(array $get): void {
+    public function handleRequest(array $get): void
+    {
         if (isset($get["route"]) && $get['route'] === "about") {
             $instancePageController = new PageController();
             $instancePageController->about();
