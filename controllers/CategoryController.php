@@ -30,8 +30,10 @@ class CategoryController
         $categoriesToDisplay = $instanceCategoryManager->findAll();
         foreach ($categoriesToDisplay as $category) {
             $channels = $instanceCategoryManager->getAllChannelsFromCategory($category->getId());
-            $searchChannels_array = $instanceChannelControler->showChannels($channels);
-            $category->setChannels($searchChannels_array);
+            if(isset($channels)) {
+               $searchChannels_array = $instanceChannelControler->showChannels($channels);
+            $category->setChannels($searchChannels_array); 
+            }
             $categories_array[] = $category;
         }
         $route = "home";
