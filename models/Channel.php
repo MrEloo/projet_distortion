@@ -5,6 +5,7 @@ class Channel
     private ?int $id = null;
     private Category $category;
     private string $name;
+    private array $posts;
 
     public function __construct(Category $category, string $name)
     {
@@ -37,5 +38,14 @@ class Channel
     public function setCategory(Category $category): void
     {
         $this->category = $category;
+    }
+
+    public function getPosts(): array
+    {
+        return $this->posts;
+    }
+    public function setPosts(array $posts): void
+    {
+        $this->posts = $posts;
     }
 }

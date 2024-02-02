@@ -120,4 +120,25 @@ class PostManager extends AbstractManager
         $query->execute($parameters);
         header("Location: https://antoinecormier.sites.3wa.io/php/bre01-php-poo-j2/Mini%20Projet/index.php");
     }
+
+    public function getPostsWithChannelId(int $id): array
+    {
+        $selectQuery = $this->db->prepare('SELECT * FROM posts JOIN channels ON posts.id_salon = channels.id  WHERE posts.id_salon = :id');
+        $parameters = [
+            'id' => $id
+        ];
+        $selectQuery->execute($parameters);
+        $posts = $selectQuery->fetchAll(PDO::FETCH_ASSOC);
+
+        $allPosts = [];
+
+        foreach ($posts as $key => $post) {
+            $newPost = new Post($post['content']);
+            $newPost->setId($post['id']);
+            $newPost->setCreated_at($post['created_at']);
+            $newPost->setChannelId($post['id_salon']);
+            $allPosts[] = $newPost;
+        }
+        return $allPosts;
+    }
 }

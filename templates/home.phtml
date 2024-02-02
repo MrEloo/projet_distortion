@@ -1,6 +1,6 @@
 <?php
 
-foreach ($categoriesToDisplay as $category) {
+foreach ($categories_array as $category) {
 ?>
     <h3><?= $category->getName() ?></h3>
     <ul>
@@ -16,6 +16,12 @@ foreach ($categoriesToDisplay as $category) {
                     <?= $channel->getName() ?>
                     <a href='index.php?id_channel=<?= $channel->getId() ?>'>Lire</a>
                 </li>
+
+                <ul>
+                    <li>
+
+                    </li>
+                </ul>
 
         <?php }
         }; ?>

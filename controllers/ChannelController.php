@@ -13,11 +13,19 @@ class ChannelController
         header('Location: index.php');
     }
 
-    public function showChannels(): array
+    public function showChannels(array $channels): array
     {
-        $newChannelManager = new ChannelsManager;
-        $channels = $newChannelManager->getChannels();
-        return $channels;
+
+        $newChannelManager = new ChannelsManager();
+        $newPostManager = new PostManager();
+        // $channels = $newChannelManager->getChannels();
+        $channels_array = [];
+        foreach ($channels as $key => $channel) {
+            $posts_array = $newPostManager->getPostsWithChannelId($channel->getId());
+            $channel->setPosts($posts_array);
+            $channels_array[] = $channel;
+        }
+        return  $channels_array;
     }
 
     public function createChannel(): void
