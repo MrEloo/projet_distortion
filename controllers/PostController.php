@@ -8,7 +8,7 @@ class PostController {
             $newPost = new Post($_POST['content']);
             $newPost->setChannelId($_POST["id_channel"]);
                 $instancePostManager->createPost($newPost);
-                header("Location: ../index.php");
+                header("Location: index.php");
         }
     }   
 }

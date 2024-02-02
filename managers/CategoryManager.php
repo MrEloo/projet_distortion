@@ -55,7 +55,7 @@ class CategoryManager extends AbstractManager
         $categorySearch = $query->fetch(PDO::FETCH_ASSOC);
         
       
-        if (isset($categorySearch)) {
+        if ($categorySearch) {
             $newCategory = new Category($categorySearch["name"]);
             $newCategory->setId($categorySearch["id"]);
             
@@ -97,4 +97,30 @@ class CategoryManager extends AbstractManager
         $query->execute($parameters);
     }
     
+    public function getAllChannelsFromCategory (int $id) : ?array
+    {
+        $query = $this->db->prepare('SELECT * FROM channels WHERE id_cat = :id_cat');
+        $parameters = [
+            'id_cat' => $id
+        ];
+        $query->execute($parameters);
+        $channelsSearch = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        $newCategoryManager = new CategoryManager();
+        $category =  $newCategoryManager -> findOne($id);
+        
+        $channels_array = [];
+        
+        if ($channelsSearch) {
+            foreach ($channelsSearch as $channel) {
+                $newChannel = new Channel($category, $channel["name"]);
+                $newChannel->setId($channel["id"]);
+            
+            $channels_array[]=$newChannel;
+            }
+        return $channels_array;
+        }
+        return null;
+    }   
 }

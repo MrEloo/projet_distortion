@@ -1,9 +1,33 @@
 <?php 
-$instanceCategoryManager = new CategoryManager();
-$categoriesToDisplay = $instanceCategoryManager->findAll();
+
+foreach ($categoriesToDisplay as $category) {
 ?>
+  <h3><?= $category->getName() ?></h3>
+    <ul>
+      <?php 
+      
+        $AllChannelsFromCategory = $instanceCategoryManager -> getAllChannelsFromCategory($category->getId());
+        
+        if (isset($AllChannelsFromCategory)) {
+          
+          foreach ($AllChannelsFromCategory as $channel) { ;?>
+          
+          <li> 
+            <?= $channel->getName() ?> 
+            <a href='index.php?id_channel=<?=$channel->getId()?>'>Lire</a>
+          </li>
+          
+        <?php } 
+        };?>
+        
+    </ul>
+  </br>
+  <?php
+}
+?>
+
 <div class="container mt-5">
-    <form method="POST" action="logic/createCategory.php">
+    <form method="POST" action="index.php?route=create-category">
         <div class="form-group">
             <label for="name">Nom de la catégorie :</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom de la catégorie">
@@ -12,7 +36,7 @@ $categoriesToDisplay = $instanceCategoryManager->findAll();
     </form>
 </div>
 <div class="container mt-5">
-    <form method="POST" action="logic/createChannel.php">
+    <form method="POST" action="index.php?route=create-channel">
         <div class="form-group">
             <label for="name">Nom du channel :</label>
             <input type="hidden" name="id_category" value="5"/>
@@ -49,7 +73,7 @@ foreach ($postToDisplay as $post) {
 }
 ?>
 <div class="container mt-5">
-  <form method="POST" action="logic/createPost.php">
+  <form method="POST" action="index.php?route=create-post">
     <div class="form-group">
       <input type="hidden" name="id_channel" value="6"/>
       <label for="content">Commentaire :</label>

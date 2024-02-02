@@ -8,12 +8,24 @@ class Router
         if (isset($get["route"]) && $get['route'] === "about") {
             $instancePageController = new PageController();
             $instancePageController->about();
+        // } else if (isset($get["route"]) && $get['route'] === "home") {
+        //     $instancePageController = new PageController();
+        //     $instancePageController->home();
+            
         } else if (isset($get["route"]) && $get['route'] === "home") {
-            $instancePageController = new PageController();
-            $instancePageController->home();
+            $instanceCategoryController = new CategoryController();
+            $instanceCategoryController->displayAllCategories();
+            $instanceCategoryController->displayAllChannels();
+            
         } else if (isset($get["route"]) && $get['route'] === "create-category") {
-            $instancePageController = new CategoryController();
-            $instancePageController->createCategory();
+            $instanceCategoryController = new CategoryController();
+            $instanceCategoryController->createCategory();
+        } else if (isset($get["route"]) && $get['route'] === "create-channel") {
+            $instanceChannelController = new ChannelController();
+            $instanceChannelController->createChannel();
+        } else if (isset($get["route"]) && $get['route'] === "create-post") {
+            $instancePostController = new PostController();
+            $instancePostController->createPost();
         } else if (!isset($get["route"])) {
             $instancePageController = new PageController();
             $instancePageController->home();
