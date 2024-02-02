@@ -8,15 +8,7 @@
 </head>
 <body>
 	<?php
-		if ($route === "about") {
-		    require "templates/about.phtml";
-		}else if ($route === "home") {
-		    require "templates/home.phtml";
-		}else if ($route === "error") {
-		    require "templates/error.phtml";
-		} else {
-			require "templates/home.phtml";
-		}
+		require "templates/$route.phtml";
 		?>
 
 

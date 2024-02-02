@@ -20,27 +20,23 @@ class CategoryController
             }
         }
     }
-    /*   if (isset($_POST['name'])) 
-        {
-            $name = $_POST['name'];
-            
-            $cat = new Category($name);
-            $cat1 = $cm->findName($cat);
-            
-            if ($cat1)
-            {  
-                header("Location: index.php");
-            }
-        }   
-    }
-    
-/* test */
 
     public function displayAllCategories(): void
     {
         $instanceCategoryManager = new CategoryManager();
+        $instanceChannelControler = new ChannelController();
+        $categories_array = [];
+        
         $categoriesToDisplay = $instanceCategoryManager->findAll();
+        foreach ($categoriesToDisplay as $category) {
+            $channels = $instanceCategoryManager->getAllChannelsFromCategory($category->getId());
+            $searchChannels_array = $instanceChannelControler->showChannels($channels);
+            $category->setChannels($searchChannels_array);
+            $categories_array[] = $category;
+        }
+        $route = "home";
         require "templates/layout.phtml";
+        
     }
 
     public function ChannelsbyCategories(): void

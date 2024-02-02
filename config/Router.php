@@ -9,10 +9,6 @@ class Router
         if (isset($get["route"]) && $get['route'] === "about") {
             $instancePageController = new PageController();
             $instancePageController->about();
-            // } else if (isset($get["route"]) && $get['route'] === "home") {
-            //     $instancePageController = new PageController();
-            //     $instancePageController->home();
-
         } else if (isset($get["route"]) && $get['route'] === "home") {
             $instanceCategoryController = new CategoryController();
             $instanceCategoryController->displayAllCategories();
@@ -30,8 +26,8 @@ class Router
             $instanceChannelController = new ChannelController();
             $instanceChannelController->deleteChannel();
         } else if (!isset($get["route"])) {
-            $instancePageController = new PageController();
-            $instancePageController->home();
+            $instanceCategoryController = new CategoryController();
+            $instanceCategoryController->displayAllCategories();
         } else {
             $instancePageController = new PageController();
             $instancePageController->error();
