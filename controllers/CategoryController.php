@@ -1,27 +1,26 @@
-<?php 
+<?php
 
-class CategoryController 
+class CategoryController
 {
-     public function __construct()
+    public function __construct()
     {
-        
     }
-    
+
     public function createCategory(): void
     {
         $instanceCategoryManager = new CategoryManager();
         if (isset($_POST['name'])) {
             $newCategory = new Category($_POST['name']);
             if ($instanceCategoryManager->findName($newCategory)) {
-                
-                header("Location: ../index.php?errorCategory=already-exist");
+
+                header("Location: index.php?errorCategory=already-exist");
             } else {
                 $instanceCategoryManager->createCategory($newCategory);
-                header("Location: ../index.php");
+                header("Location: index.php");
             }
         }
-        
-     /*   if (isset($_POST['name'])) 
+
+        /*   if (isset($_POST['name'])) 
         {
             $name = $_POST['name'];
             
@@ -44,5 +43,12 @@ class CategoryController
     }
     
    */
+    }
+
+    public function deleteCategory(): void
+    {
+        $instanceChannelManager = new CategoryManager();
+        $instanceChannelManager->delete($_GET['channel-id']);
+        header('Location: index.php');
     }
 }

@@ -61,12 +61,22 @@ class ChannelsManager extends AbstractManager
         $createQuery->execute($parameters);
     }
 
-    public function deleteChannel($channel): void
+    public function deleteChannel($id): void
     {
-        $deleteQuery = $this->db->prepare('DELETE FROM channels WHERE id_cat = :id_cat AND name = :name');
+
+        $newCategoryManager = new CategoryManager();
+
+
+
+        $deleteQuery = $this->db->prepare('DELETE FROM posts WHERE id_salon = :id_salon');
+        $parametersDeletePosts = [
+            'id_salon' => $id,
+        ];
+        $deleteQuery->execute($parametersDeletePosts);
+
+        $deleteQuery = $this->db->prepare('DELETE FROM channels WHERE id = :id');
         $parameters = [
-            'id_cat' => $channel->getCategory()->getId(),
-            'name' => $channel->getName()
+            'id' => $id
         ];
         $deleteQuery->execute($parameters);
     }

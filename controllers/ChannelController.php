@@ -6,13 +6,12 @@ class ChannelController
     {
     }
 
-    // public function checkChannel(): void
-    // {
-    //     $newChannelManager = new ChannelsManager();
-    //     $newChannelManager->createChannel(1, 'Mon premier channel');
-    //     $route = 'error';
-    //     require 'templates/layout.phtml';
-    // }
+    public function deleteChannel(): void
+    {
+        $instanceChannelManager = new ChannelsManager();
+        $instanceChannelManager->deleteChannel($_GET['channel-id']);
+        header('Location: index.php');
+    }
 
     public function showChannels(): array
     {
@@ -27,13 +26,13 @@ class ChannelController
         if (isset($_POST['name']) && (isset($_POST["id_category"]))) {
             $verifChannel = $instanceChannelManager->getChannelWithIdCategory($_POST['name'], $_POST["id_category"]);
             if (isset($verifChannel)) {
-                header("Location: ../index.php?errorChannel=already-exist");
+                header("Location: index.php?errorChannel=already-exist");
             } else {
                 $instanceCategoryManager = new CategoryManager();
                 $category = $instanceCategoryManager->findOne($_POST['id_category']);
                 $newChannel = new Channel($category, $_POST['name']);
                 $instanceChannelManager->createChannel($newChannel);
-                header("Location: ../index.php");
+                header("Location: index.php");
             }
         }
     }

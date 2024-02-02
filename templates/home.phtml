@@ -12,7 +12,7 @@ $categoriesToDisplay = $instanceCategoryManager->findAll();
     </form>
 </div>
 <div class="container mt-5">
-    <form method="POST" action="logic/createChannel.php">
+    <form method="POST" action="index.php?route=create-channel">
         <div class="form-group">
             <label for="name">Nom du channel :</label>
             <input type="hidden" name="id_category" value="5" />
@@ -21,13 +21,28 @@ $categoriesToDisplay = $instanceCategoryManager->findAll();
         <button type="submit" class="btn btn-primary">Soumettre</button>
     </form>
 </div>
+<div class="container mt-5">
+    <form method="POST" action="index.php?route=delete-channel&id_cat=3">
+        <div class="form-group">
+            <label for="name">Supprimer le salon</label>
+            <input type="hidden" name="id_category" value="5" />
+            <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du channel">
+        </div>
+        <button type="submit" class="btn btn-primary">Supprimer</button>
+    </form>
+</div>
+
 <?php
+
+
 $instancePostManager = new PostManager();
 $postToDisplay = $instancePostManager->findAll();
 $instanceChannelController = new ChannelController();
 $channelsToDisplay = $instanceChannelController->showChannels();
 foreach ($channelsToDisplay as $channel) {
 ?>
+    <a href="index.php?route=delete-channel&channel-id=2">DELETE Channel</a>
+    <a href="index.php?route=delete-category&category-id=2">DELETE category</a>
     <p><?= $channel->getName() ?> in <?= $channel->getCategory()->getName() ?></p>
     </br>
 <?php
