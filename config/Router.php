@@ -4,13 +4,17 @@
 class Router
 {
 
-   public function handleRequest(array $get): void {
+    public function handleRequest(array $get): void
+    {
         if (isset($get["route"]) && $get['route'] === "about") {
             $instancePageController = new PageController();
             $instancePageController->about();
         } else if (isset($get["route"]) && $get['route'] === "home") {
             $instancePageController = new PageController();
             $instancePageController->home();
+        } else if (isset($get["route"]) && $get['route'] === "create-category") {
+            $instancePageController = new CatController();
+            $instancePageController->createCategory();
         } else if (!isset($get["route"])) {
             $instancePageController = new PageController();
             $instancePageController->home();
