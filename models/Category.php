@@ -3,7 +3,7 @@
 class Category
 {
     private ?int $id = null;
-    private array $channels;
+    private array $channels = [];
 
     public function __construct(private string $name)
     {
