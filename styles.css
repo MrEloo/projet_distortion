@@ -1,0 +1,108 @@
+/* *****************************************************************
+TOOLS
+***************************************************************** */
+
+body * {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 1.6rem;
+	width : 100vw;
+	height : 100vh;
+	margin : 0;
+}
+
+/* *****************************************************************
+GENERALITES
+***************************************************************** */
+
+header {
+  background-color: #2f3136;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo {
+  display: flex;
+  flex-direction : column;
+  align-items: center;
+}
+
+.logo h1 {
+  margin-right: 10px;
+}
+
+.logo img {
+    max-width: 50%;
+    height: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-family : 'Gothic sans ms';
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+main {
+  display: flex;
+  height: 100%; /* Ajustement pour occuper toute la hauteur de la vue */
+}
+
+.left-column {
+  width: 25%;
+  background-color: #2f3136;
+  color: white;
+  padding: 10px;
+}
+
+.chat-space {
+  display : grid;
+  grid-template-rows: 95% 5%;
+  flex-grow: 1;
+  background-color: #36393f;
+  color: white;
+  padding: 10px;
+  height: 100%; /* Ajustement pour occuper toute la hauteur de la vue */
+}
+
+.post-content {
+  margin-bottom: 10px;
+}
+
+.post-form {
+  display: flex;
+  width:100vw;
+  color: white;
+}
+
+.post-form label {
+  margin-bottom: 5px;
+}
+
+.post-form textarea {
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.post-form button {
+  background-color: #2f3136;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
