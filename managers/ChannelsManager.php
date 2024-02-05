@@ -59,6 +59,8 @@ class ChannelsManager extends AbstractManager
             'name' => $channel->getName()
         ];
         $createQuery->execute($parameters);
+        $lastChannelId = $this->db->lastInsertId();
+        $channel->setId($lastChannelId);
     }
 
     public function deleteChannel($id): void

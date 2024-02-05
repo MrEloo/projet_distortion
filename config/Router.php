@@ -25,6 +25,9 @@ class Router
         } else if (isset($get["route"]) && $get['route'] === "delete-channel") {
             $instanceChannelController = new ChannelController();
             $instanceChannelController->deleteChannel();
+        } else if (isset($get["route"]) && $get['route'] === "delete-category") {
+            $instanceCategoryController = new CategoryController();
+            $instanceCategoryController->deleteCategory();
         } else if (!isset($get["route"])) {
             $instanceCategoryController = new CategoryController();
             $instanceCategoryController->displayAllCategories();
