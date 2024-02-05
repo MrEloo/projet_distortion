@@ -9,7 +9,8 @@ class PostController
             $newPost = new Post($_POST['content']);
             $newPost->setChannelId($_POST["id_channel"]);
             $instancePostManager->createPost($newPost);
-            header("Location: index.php");
+            header("Location: index.php?id_channel={$_POST["url_channel_id"]}&id_category={$_POST["url_category_id"]}");
+
         }
     }
 

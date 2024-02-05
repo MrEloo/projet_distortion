@@ -12,7 +12,6 @@ class Router
         } else if (isset($get["route"]) && $get['route'] === "home") {
             $instanceCategoryController = new CategoryController();
             $instanceCategoryController->displayAllCategories();
-            // $instanceCategoryController->displayAllChannels();
         } else if (isset($get["route"]) && $get['route'] === "create-category") {
             $instanceCategoryController = new CategoryController();
             $instanceCategoryController->createCategory();

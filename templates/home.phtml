@@ -1,69 +1,80 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Distorsion</title>
+</head>
+<body>
 
+    <header class="header">
+        <figure class="logo">
+          <h1>Distorsion</h1>
+          <img><i class="fa-solid fa-tornado fa-shake"></i></img>
+        </figure>
+        
+        <nav class="nav">
+          <a href="#">Chat</a>
+          <a href="#">À propos</a>
+        </nav>
+    </header>
 
-?>
-<div class="container mt-5">
-    <form method="POST" action="index.php?route=create-category">
-        <div class="form-group">
-            <label for="name">Nom de la catégorie :</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom de la catégorie">
-        </div>
-        <button type="submit" class="btn btn-primary">+</button>
-    </form>
-</div>
-
-<?php
-foreach ($categories_array as $category) {
-    $categoryName = $category->getName();
-    $categoryChannels = $category->getChannels();
-?>
-    <h2 style="color: red;"><?= $categoryName ?></h2>
-    <div class="container mt-5">
-        <form method="POST" action="index.php?route=create-channel">
-            <div class="form-group">
-                <label for="name">Nouveau salon</label>
-                <input type="hidden" name="id_category" value="<?= $category->getId() ?>" />
-                <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du channel">
-            </div>
-            <button type="submit" class="btn btn-primary">+</button>
-        </form>
-    </div>
-    <a href="index.php?route=delete-category&category-id=<?= $category->getId() ?>">DELETE category</a>
-
-    <?php
-    if (isset($categoryChannels)) {
-        foreach ($categoryChannels as $channel) {
-            $channelName = $channel->getName();
-            $channelPosts = $channel->getPosts();
-    ?>
-            <h3 style="color: green;"><?= $channelName ?></h3>
-            <div class="container mt-5">
-                <form method="POST" action="index.php?route=create-post">
-                    <div class="form-group">
-                        <input type="hidden" name="id_channel" value="<?= $channel->getId() ?>" />
-                        <label for="content">Add post</label>
-                        <textarea class="form-control" id="content" name="content" rows="4" placeholder="Saisissez votre commentaire ici"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">+</button>
-                </form>
-            </div>
-            <a href="index.php?route=delete-channel&channel-id=<?= $channel->getId() ?>">DELETE Channel</a>
-
+    <main>
+        <section class="left-column">
             <?php
-            if (isset($channelPosts)) {
-                foreach ($channelPosts as $post) {
-                    $postContent = $post->getContent();
-                    $postDate = $post->getCreatedAt();
-                    $post_Id = $post->getId();
-            ?>
-                    <a href="index.php?route=delete-post&post-id=<?= $post_Id ?>">DELETE</a>
-                    <p style="color: purple;"><?= $postContent ?></p>
-                    <p style="font-style: italic;"><?= $postDate ?></p>
-
-<?php
+            foreach ($categories_array as $keyCat => $category) {
+                $categoryName = $category->getName();
+                $categoryChannels = $category->getChannels()
+                ?> <h2><?=$categoryName?></h2>
+                <?php
+                if (isset($categoryChannels)) {
+                    foreach($categoryChannels as $keyChan => $channel) {
+                        $channelName = $channel->getName();
+                        $channelPosts = $channel->getPosts();
+                        ?> <a href="index.php?id_channel=<?= $keyChan?>&id_category=<?=$keyCat?>"><?=$channelName?></a>
+                        <?php
+                    }
                 }
             }
-        }
-    }
-}
-?>
+            ?>
+        </section>
+        
+        
+        <section class="chat-space">
+            <div>
+                <p class=post-content>Messages</p>
+                <?php 
+                    if(isset($_GET["id_channel"])&& isset($_GET["id_category"])) {
+                        $channelsSelected = $categories_array[$_GET["id_category"]]->getChannels();
+                        if (isset($channelsSelected)) {
+                            $channelId = $channelsSelected[$_GET["id_channel"]]->getId();
+                            $postToDisplay = $channelsSelected[$_GET["id_channel"]]->getPosts();
+                            foreach($postToDisplay as $post) {
+                            ?>
+                                <p><?= $post->getContent();?></p>
+                               
+            
+            <?php
+                            }
+                        } ?>
+                        
+                        <form class="post-form" method = "post" action="index.php?route=create-post">
+                        <input type="hidden" name="id_channel" value="<?= $channelId?>" />
+                        <input type="hidden" name="url_channel_id" value="<?=$_GET["id_channel"]?>"/>
+                        <input type="hidden" name="url_category_id" value="<?=$_GET["id_category"]?>"/>
+                        <label for="content">Message:</label>
+                        <textarea id="content" name="content"></textarea>
+                        <button type="submit">Envoyer</button>
+                        </form> 
+            <?php
+                    } 
+                ?>
+          </div>
+        </section>
+          
+    </main>
+
+</body>
+</html>
