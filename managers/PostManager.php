@@ -118,12 +118,11 @@ class PostManager extends AbstractManager
         $query = $this->db->prepare('DELETE FROM posts WHERE id = :postId');
         $parameters = ['postId' => $id];
         $query->execute($parameters);
-        header("Location: https://antoinecormier.sites.3wa.io/php/bre01-php-poo-j2/Mini%20Projet/index.php");
     }
 
     public function getPostsWithChannelId(int $id): array
     {
-        $selectQuery = $this->db->prepare('SELECT * FROM posts JOIN channels ON posts.id_salon = channels.id  WHERE posts.id_salon = :id');
+        $selectQuery = $this->db->prepare('SELECT posts.*, channels.id AS channels_id FROM posts JOIN channels ON posts.id_salon = channels.id  WHERE posts.id_salon = :id');
         $parameters = [
             'id' => $id
         ];
@@ -136,7 +135,7 @@ class PostManager extends AbstractManager
             $newPost = new Post($post['content']);
             $newPost->setId($post['id']);
             $newPost->setCreated_at($post['created_at']);
-            $newPost->setChannelId($post['id_salon']);
+            $newPost->setChannelId($post['channels_id']);
             $allPosts[] = $newPost;
         }
         return $allPosts;

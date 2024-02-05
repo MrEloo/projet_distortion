@@ -20,14 +20,11 @@ class ChannelController
         $newPostManager = new PostManager();
         // $channels = $newChannelManager->getChannels();
         $channels_array = [];
-        if(isset($channels)) {
         foreach ($channels as $key => $channel) {
             $posts_array = $newPostManager->getPostsWithChannelId($channel->getId());
-            if(isset($posts_array)) {
             $channel->setPosts($posts_array);
-            }
             $channels_array[] = $channel;
-        }}
+        }
         return  $channels_array;
     }
 

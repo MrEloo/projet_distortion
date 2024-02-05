@@ -17,8 +17,17 @@ foreach ($categories_array as $category) {
     $categoryName = $category->getName();
     $categoryChannels = $category->getChannels();
 ?>
-
     <h2 style="color: red;"><?= $categoryName ?></h2>
+    <div class="container mt-5">
+        <form method="POST" action="index.php?route=create-channel">
+            <div class="form-group">
+                <label for="name">Nouveau salon</label>
+                <input type="hidden" name="id_category" value="<?= $category->getId() ?>" />
+                <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du channel">
+            </div>
+            <button type="submit" class="btn btn-primary">+</button>
+        </form>
+    </div>
     <a href="index.php?route=delete-category&category-id=<?= $category->getId() ?>">DELETE category</a>
 
     <?php
@@ -28,6 +37,16 @@ foreach ($categories_array as $category) {
             $channelPosts = $channel->getPosts();
     ?>
             <h3 style="color: green;"><?= $channelName ?></h3>
+            <div class="container mt-5">
+                <form method="POST" action="index.php?route=create-post">
+                    <div class="form-group">
+                        <input type="hidden" name="id_channel" value="<?= $channel->getId() ?>" />
+                        <label for="content">Add post</label>
+                        <textarea class="form-control" id="content" name="content" rows="4" placeholder="Saisissez votre commentaire ici"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">+</button>
+                </form>
+            </div>
             <a href="index.php?route=delete-channel&channel-id=<?= $channel->getId() ?>">DELETE Channel</a>
 
             <?php
@@ -35,10 +54,12 @@ foreach ($categories_array as $category) {
                 foreach ($channelPosts as $post) {
                     $postContent = $post->getContent();
                     $postDate = $post->getCreatedAt();
+                    $post_Id = $post->getId();
             ?>
+                    <a href="index.php?route=delete-post&post-id=<?= $post_Id ?>">DELETE</a>
                     <p style="color: purple;"><?= $postContent ?></p>
                     <p style="font-style: italic;"><?= $postDate ?></p>
-                    <a href="index.php?route=delete-post&post-id=<?= $post->getId() ?>">DELETE post</a>
+
 <?php
                 }
             }
@@ -46,64 +67,3 @@ foreach ($categories_array as $category) {
     }
 }
 ?>
-
-
-<div class="container mt-5">
-    <form method="POST" action="index.php?route=delete-channel&id_cat=3">
-        <div class="form-group">
-            <label for="name">Supprimer le salon</label>
-            <input type="hidden" name="id_category" value="5" />
-            <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du channel">
-        </div>
-        <button type="submit" class="btn btn-primary">Supprimer</button>
-    </form>
-</div>
-<div class="container mt-5">
-    <form method="POST" action="index.php?route=create-post">
-        <div class="form-group">
-            <?php foreach ($variable as $key => $value) { /* Add logic here if needed */
-            } ?>
-            <input type="hidden" name="id_channel" value="47" />
-            <label for="content">Commentaire :</label>
-            <textarea class="form-control" id="content" name="content" rows="4" placeholder="Saisissez votre commentaire ici"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-    </form>
-</div>
-
-<?php
-$instancePostManager = new PostManager();
-$postToDisplay = $instancePostManager->findAll();
-$instanceChannelController = new ChannelController();
-// $channelsToDisplay = $instanceChannelController->showChannels();
-foreach ($channelsToDisplay as $channel) {
-?>
-    <p><?= $channel->getName() ?> in <?= $channel->getCategory()->getName() ?></p>
-    <br>
-<?php
-}
-foreach ($postToDisplay as $post) {
-?>
-    <div class="card mb-3">
-        <div class="card-header">
-            <strong>Channel:</strong> <?php echo $post->getChannel()->getName(); ?>
-            <br>
-            <strong>Category:</strong> <?php echo $post->getChannel()->getCategory()->getName(); ?>
-        </div>
-        <div class="card-body">
-            <p class="card-text"><?php echo $post->getContent(); ?></p>
-        </div>
-    </div>
-<?php
-}
-?>
-<div class="container mt-5">
-    <form method="POST" action="index.php?route=create-post">
-        <div class="form-group">
-            <input type="hidden" name="id_channel" value="6" />
-            <label for="content">Commentaire :</label>
-            <textarea class="form-control" id="content" name="content" rows="4" placeholder="Saisissez votre commentaire ici"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-    </form>
-</div>

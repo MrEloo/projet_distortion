@@ -28,6 +28,9 @@ class Router
         } else if (isset($get["route"]) && $get['route'] === "delete-category") {
             $instanceCategoryController = new CategoryController();
             $instanceCategoryController->deleteCategory();
+        } else if (isset($get["route"]) && $get['route'] === "delete-post") {
+            $instancePostController = new PostController;
+            $instancePostController->deletePost();
         } else if (!isset($get["route"])) {
             $instanceCategoryController = new CategoryController();
             $instanceCategoryController->displayAllCategories();

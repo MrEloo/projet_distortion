@@ -10,8 +10,14 @@ class PostController
             $newPost->setChannelId($_POST["id_channel"]);
             $instancePostManager->createPost($newPost);
             header("Location: index.php");
-            $instancePostManager->createPost($newPost);
-            header("Location: index.php");
         }
+    }
+
+    public function deletePost(): void
+    {
+        $instancePostManager = new PostManager();
+        $instancePostManager->delete($_GET['post-id']);
+        var_dump($_GET);
+        header('location: index.php');
     }
 }
