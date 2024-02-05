@@ -1,0 +1,278 @@
+/* *****************************************************************
+TOOLS
+***************************************************************** */
+
+body * {
+	box-sizing: border-box;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 1.6rem;
+	width : 100%;
+	height : 100vh;
+	margin : 0;
+}
+
+/* *****************************************************************
+GENERALITES
+***************************************************************** */
+
+header {
+  background-color: #2f3136;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo {
+  font-size : 6rem;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  background-image: linear-gradient(to right, #ff0000, #ff9900, #33cc33, #3366cc);
+  color: transparent; 
+  -webkit-background-clip: text; 
+  background-clip: text;
+}
+
+.logo .fa-solid {
+  font-size : 4rem;
+  margin : 0 0.2rem 0 0.2rem;
+}
+
+.logo img {
+    max-width: 50%;
+    height: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-family : 'Gothic sans ms';
+  font-weight:100;
+  color : yellow;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  width : 100%;
+  height: 100%; 
+}
+
+.left-column {
+  background-color: #2f3136;
+  color: white;
+  padding: 10px;
+}
+
+.category .fa-circle-plus {
+  font-size : 1.5rem;
+}
+
+.category .fa-circle-minus {
+  font-size : 1.5rem;
+}
+
+.categoryName .fa-circle-plus {
+  font-size : 1.5rem;
+}
+
+.categoryName .fa-circle-minus {
+  font-size : 1.5rem;
+}
+
+.channelTitle .fa-circle-plus {
+  font-size : 1rem;
+}
+
+.channelTitle .fa-circle-minus {
+  font-size : 1rem;
+}
+
+.channelTitle {
+  text-decoration:none;
+  color : #a5a5a7;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
+.fa-circle-plus {
+  font-size : 1.5rem;
+}
+
+.categoryTitle .fa-circle-minus {
+  font-size : 1.5rem;
+}
+
+.fa-solid {
+  color : #f7d602;
+}
+
+.chat-space {
+  display : grid;
+  grid-template-rows: 95% 5%;
+  background-color: #36393f;
+  color: white;
+  padding: 10px;
+  margin-bottom: 0.2rem;
+}
+
+.postContent {
+  font-size : 1.5rem;
+  font-weight : 100;
+}
+
+.post-form {
+  width : 100%;
+  display: flex;
+  align-items:center;
+  text-align:center;
+  color: white;
+  position: fixed;
+  bottom: 14px;
+}
+
+.post-form textarea {
+  background-color: white;
+  width : 50%;
+  margin : 1rem;
+}
+
+.post-form button {
+  background-color: #f7d602;
+  color: #2f3136;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius:5px;
+  margin : 1rem;
+}
+
+.modale {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1rem;
+  background-color: red;
+  position: absolute;
+  left: 40rem;
+  top: 25rem;
+  padding: 1em;
+  opacity: 0;
+}
+
+.modale form {
+  position: relative;
+  display: flex;
+  top: 2rem;
+  margin: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.modale input,
+.modale label {
+  padding: 1rem;
+}
+
+.modale button {
+  display: block;
+  margin: 1.5rem auto;
+
+}
+
+.modale-visible {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1rem;
+  background-image: linear-gradient(to right, #ff0000, #ff9900, #33cc33, #3366cc);
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  padding: 1em;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+
+/**/
+
+
+.modale2 {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1rem;
+  background-color: red;
+  position: absolute;
+  left: 40rem;
+  top: 25rem;
+  padding: 1em;
+  opacity: 0;
+}
+
+.modale2 form {
+  position: relative;
+  display: flex;
+  top: 2rem;
+  margin: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.modale2 input,
+.modale2 label {
+  padding: 1rem;
+}
+
+.modale2 button {
+  display: block;
+  margin: 1.5rem auto;
+
+}
+
+.modale2-visible {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1rem;
+  background-image: linear-gradient(to right, #ff0000, #ff9900, #33cc33, #3366cc);
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  padding: 1em;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.enorme {
+  padding: 2rem;
+  font-size: 5rem;
+}
+.about {
+  background-color: #36393f;
+  height: 100%;
+}
+.cards {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+header a {
+  text-decoration: none;
+}
