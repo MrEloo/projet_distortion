@@ -26,7 +26,7 @@ class CategoryController
         $instanceCategoryManager = new CategoryManager();
         $instanceChannelControler = new ChannelController();
         $categories_array = [];
-        
+
         $categoriesToDisplay = $instanceCategoryManager->findAll();
         foreach ($categoriesToDisplay as $category) {
             $channels = $instanceCategoryManager->getAllChannelsFromCategory($category->getId());
@@ -36,7 +36,6 @@ class CategoryController
         }
         $route = "home";
         require "templates/layout.phtml";
-        
     }
 
     public function ChannelsbyCategories(): void
