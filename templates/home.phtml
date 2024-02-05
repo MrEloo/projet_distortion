@@ -1,5 +1,5 @@
 <?php
-
+var_dump($categories_array);
 foreach ($categories_array as $category) {
 ?>
     <h3><?= $category->getName() ?></h3>
@@ -65,7 +65,7 @@ foreach ($categories_array as $category) {
 <?php
 
 
-$instancePostManager = new PostManager();
+/*$instancePostManager = new PostManager();
 $postToDisplay = $instancePostManager->findAll();
 $instanceChannelController = new ChannelController();
 $channelsToDisplay = $instanceChannelController->showChannels();
@@ -102,4 +102,4 @@ foreach ($postToDisplay as $post) {
         </div>
         <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
-</div>
+</div>*/
